@@ -21,7 +21,8 @@ curl -L \
      -H "Accept: application/vnd.github.v3.raw" \
      "https://api.github.com/repos/SeismicSystems/seismic-foundry/contents/sfoundryup/install?ref=seismic" | bash
 
-# Source the bashrc to apply changes
+# Ensure sfoundryup is in the PATH
+echo 'export PATH=$PATH:/root/.seismic/bin' >> ~/.bashrc
 source ~/.bashrc
 
 # Step 4: Run sfoundryup
