@@ -5,12 +5,13 @@ echo "Installing Rust..."
 curl https://sh.rustup.rs -sSf | sh  # Choose default, just press enter
 . "$HOME/.cargo/env"
 
-# Step 2: Install jq (For Mac OS via Homebrew)
+# Step 2: Install jq (For Ubuntu via apt-get)
 echo "Installing jq..."
-if command -v brew &>/dev/null; then
-    brew install jq
+if command -v apt-get &>/dev/null; then
+    sudo apt-get update
+    sudo apt-get install -y jq
 else
-    echo "Homebrew not found, please install Homebrew and jq manually."
+    echo "apt-get not found, please ensure you're using Ubuntu or Debian-based system."
     exit 1
 fi
 
