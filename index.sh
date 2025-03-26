@@ -22,8 +22,8 @@ curl -L \
      "https://api.github.com/repos/SeismicSystems/seismic-foundry/contents/sfoundryup/install?ref=seismic" | bash
 
 # Ensure sfoundryup is in the PATH
-echo 'export PATH=$PATH:/root/.seismic/bin' >> ~/.bashrc
 source ~/.bashrc
+export PATH=$PATH:/root/.seismic/bin
 
 # Step 4: Run sfoundryup
 echo "Running sfoundryup...1"
