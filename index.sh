@@ -2,37 +2,42 @@
 
 # Step 1: Install Rust
 echo "Installing Rust..."
-curl https://sh.rustup.rs -sSf | sh  # Choose default, just press enter
+curl https://sh.rustup.rs -sSf | sh -s -- -y  # Chọn cài đặt mặc định
 . "$HOME/.cargo/env"
 
-# Step 2: Install jq (For Ubuntu via apt-get)
-echo "Installing jq..."
+# Step 2: Install prerequisites (jq, git, file)
+echo "Installing prerequisites..."
 if command -v apt-get &>/dev/null; then
     apt-get update
-    apt-get install -y jq git  # Ensure git is installed
+    apt-get install -y jq git file  # Thêm file utility để tránh lỗi với sfoundryup
 else
     echo "apt-get not found, please ensure you're using Ubuntu or Debian-based system."
     exit 1
 fi
 
 # Step 3: Install sfoundryup
-echo "Installing sfoundryup...2"
+echo "Installing sfoundryup...1"
 curl -L \
      -H "Accept: application/vnd.github.v3.raw" \
      "https://api.github.com/repos/SeismicSystems/seismic-foundry/contents/sfoundryup/install?ref=seismic" | bash
 
-# Ensure sfoundryup is in the PATH
+# Cập nhật PATH và kiểm tra cài đặt sfoundryup
 source ~/.bashrc
 export PATH=$PATH:/root/.seismic/bin
-
-# Step 4: Run sfoundryup
-echo "Running sfoundryup...2"
-if ! command -v sfoundryup &>/dev/null; then
-    echo "sfoundryup installation failed or not found. Please check the installation logs."
+if [ ! -f "/root/.seismic/bin/sfoundryup" ]; then
+    echo "sfoundryup installation failed. Please check the installation logs."
     exit 1
 fi
 
-sfoundryup  # This could take between 5m to 60m and may stall at 98% (which is normal)
+# Step 4: Run sfoundryup
+echo "Running sfoundryup..."
+sfoundryup  # Quá trình này có thể mất từ 5 đến 60 phút và có thể dừng ở 98% (bình thường)
+
+# Kiểm tra xem scast có sẵn không
+if ! command -v scast &>/dev/null; then
+    echo "scast not found. Please ensure sfoundry is installed correctly."
+    exit 1
+fi
 
 # Step 5: Clone repository
 echo "Cloning repository..."
