@@ -16,7 +16,7 @@ else
 fi
 
 # Step 3: Install sfoundryup
-echo "Installing sfoundryup...1"
+echo "Installing sfoundryup...2"
 curl -L \
      -H "Accept: application/vnd.github.v3.raw" \
      "https://api.github.com/repos/SeismicSystems/seismic-foundry/contents/sfoundryup/install?ref=seismic" | bash
@@ -26,7 +26,7 @@ source ~/.bashrc
 export PATH=$PATH:/root/.seismic/bin
 
 # Step 4: Run sfoundryup
-echo "Running sfoundryup...1"
+echo "Running sfoundryup...2"
 if ! command -v sfoundryup &>/dev/null; then
     echo "sfoundryup installation failed or not found. Please check the installation logs."
     exit 1
