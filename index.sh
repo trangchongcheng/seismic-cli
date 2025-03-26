@@ -26,7 +26,7 @@ echo 'export PATH=$PATH:/root/.seismic/bin' >> ~/.bashrc
 source ~/.bashrc
 
 # Step 4: Run sfoundryup
-echo "Running sfoundryup..."
+echo "Running sfoundryup...1"
 if ! command -v sfoundryup &>/dev/null; then
     echo "sfoundryup installation failed or not found. Please check the installation logs."
     exit 1
