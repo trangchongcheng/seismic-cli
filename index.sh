@@ -9,7 +9,7 @@ curl https://sh.rustup.rs -sSf | sh  # Choose default, just press enter
 echo "Installing jq..."
 if command -v apt-get &>/dev/null; then
     apt-get update
-    apt-get install -y jq
+    apt-get install -y jq git  # Ensure git is installed
 else
     echo "apt-get not found, please ensure you're using Ubuntu or Debian-based system."
     exit 1
@@ -26,12 +26,23 @@ source ~/.bashrc
 
 # Step 4: Run sfoundryup
 echo "Running sfoundryup..."
+if ! command -v sfoundryup &>/dev/null; then
+    echo "sfoundryup installation failed or not found. Please check the installation logs."
+    exit 1
+fi
+
 sfoundryup  # This could take between 5m to 60m and may stall at 98% (which is normal)
 
 # Step 5: Clone repository
 echo "Cloning repository..."
 git clone --recurse-submodules https://github.com/SeismicSystems/try-devnet.git
 cd try-devnet/packages/contract/
+
+# Check if deploy script exists
+if [[ ! -f "script/deploy.sh" ]]; then
+    echo "Deploy script not found. Please ensure the repository structure is correct."
+    exit 1
+fi
 
 # Step 6: Deploy contract
 echo "Deploying contract..."
