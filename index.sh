@@ -16,7 +16,7 @@ else
 fi
 
 # Step 3: Install sfoundryup
-echo "Installing sfoundryup..."
+echo "Installing sfoundryup...1"
 curl -L \
      -H "Accept: application/vnd.github.v3.raw" \
      "https://api.github.com/repos/SeismicSystems/seismic-foundry/contents/sfoundryup/install?ref=seismic" | bash
