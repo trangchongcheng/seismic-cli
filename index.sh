@@ -8,8 +8,8 @@ curl https://sh.rustup.rs -sSf | sh  # Choose default, just press enter
 # Step 2: Install jq (For Ubuntu via apt-get)
 echo "Installing jq..."
 if command -v apt-get &>/dev/null; then
-    sudo apt-get update
-    sudo apt-get install -y jq
+    apt-get update
+    apt-get install -y jq
 else
     echo "apt-get not found, please ensure you're using Ubuntu or Debian-based system."
     exit 1
